@@ -3,6 +3,7 @@
 #define FILTER_SIGN 0x80000000
 #define FILTER_FRACT 0x7FFFFF
 #define FILTER_32 0xFFFFFF
+#define ROUND_BIT 0x00000040
 
 void printBinary(int num)
 {
@@ -77,94 +78,54 @@ mfloat negsf2(mfloat a)
 
 mfloat addsf3(mfloat a, mfloat b)
 {
-    if ((b == (mfloat)0))
+    if ((b == 0x00000000))
         return a;
-    if ((a == (mfloat)0))
+    if ((a == 0x00000000))
         return b;
 
-    mint exp_a = (a & FILTER_EXP) >> 23;
-    mint exp_b = (b & FILTER_EXP) >> 23;
-    mint fract_a = (a & FILTER_FRACT) + (1 << 23);
-    mint fract_b = (b & FILTER_FRACT) + (1 << 23);
-    mint sign_a = (a & FILTER_SIGN) >> 31;
-    mint sign_b = (b & FILTER_SIGN) >> 31;
-    mint fract, exp, sign;
+    mfloat exp_a = (a & FILTER_EXP) >> 23;
+    mfloat exp_b = (b & FILTER_EXP) >> 23;
+    mfloat fract_a = (a & FILTER_FRACT) | (1 << 23);
+    mfloat fract_b = (b & FILTER_FRACT) | (1 << 23);
+    mfloat sign_a = (a & FILTER_SIGN) >> 31;
+    mfloat sign_b = (b & FILTER_SIGN) >> 31;
+    mfloat fract, exp, sign;
 
-    if (exp_a > exp_b)
+    if (exp_a >= exp_b)
     {
+        fract_b = (exp_a - exp_b) < 32 ? fract_b >> (exp_a - exp_b) : 0;
         exp = exp_a;
-        sign = sign_a;
-        fract_b >>= (exp_a - exp_b);
-        if (sign_a == sign_b)
-        {
-            fract = fract_a + fract_b;
-        }
-        else
-        {
-            fract = fract_a - fract_b;
-        }
     }
-    else if (exp_a < exp_b)
+    else
     {
+        fract_a = (exp_b - exp_a) < 32 ? fract_a >> (exp_b - exp_a) : 0;
         exp = exp_b;
-        sign = sign_b;
-        fract_a >>= (exp_b - exp_a);
-        if (sign_a == sign_b)
-        {
-            fract = fract_a + fract_b;
-        }
-        else
-        {
-            fract = fract_b - fract_a;
-        }
+    }
+
+    if (sign_a == sign_b)
+    {
+        fract = fract_a + fract_b;
+        sign = sign_a;
     }
     else
     {
-        if (fract_a >= fract_b)
-        {
-            if (sign_a == sign_b)
-            {
-                fract = fract_a + fract_b;
-                sign = sign_a;
-            }
-            else
-            {
-                fract = fract_a - fract_b;
-                sign = sign_a;
-            }
-        }
-        else if (fract_a < fract_b)
-        {
-            if (sign_a == sign_b)
-            {
-                fract = fract_a + fract_b;
-                sign = sign_b;
-            }
-            else
-            {
-                fract = fract_b - fract_a;
-                sign = sign_b;
-            }
-        }
+        fract = (fract_a >= fract_b) ? fract_a - fract_b : fract_b - fract_a;
+        sign = (fract_a >= fract_b) ? sign_a : sign_b;
+        if (fract == 0)
+            return 0;
     }
-
-    if (fract == 0)
-        return 0;
-
-    if ((fract & (1 << 23)) != 0)
-    {
-        while (((fract & (1 << 23)) != (1 << 23)) & exp > 0)
-        {
-            fract <<= 1;
-            fract += 1;
-            exp--;
-        }
-    }
-    else
+    while ((fract & (1 << 24)))
     {
         fract >>= 1;
         exp++;
     }
+    while ((fract & (1 << 23)) != (1 << 23))
+    {
+        fract <<= 1;
+        exp--;
+    }
+    if (exp == 0)
+        return 0;
 
     fract &= FILTER_FRACT;
     return (sign << 31) | (exp << 23) | fract;
@@ -172,6 +133,5 @@ mfloat addsf3(mfloat a, mfloat b)
 
 mfloat subsf3(mfloat a, mfloat b)
 {
-
     return addsf3(a, negsf2(b));
 }
