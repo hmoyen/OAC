@@ -3,17 +3,6 @@
 #define FILTER_SIGN 0x80000000
 #define FILTER_FRACT 0x7FFFFF
 #define FILTER_32 0xFFFFFF
-void printBinary(int num);
-int main()
-{
-    mfloat c = floatsisf(999);
-    mfloat d = floatsisf(-1000);
-    int a = addsf3(c, d);
-    printf("result: %d\n", fixsfsi(a));
-
-    printBinary(a);
-    return 0;
-}
 
 void printBinary(int num)
 {
@@ -64,7 +53,10 @@ mint fixsfsi(mfloat a)
     exp -= 127;
     r &= FILTER_FRACT;
     r += (1 << 23);
-    r >>= 23 - exp;
+    if (exp < 23)
+        r >>= 23 - exp;
+    else
+        r <<= exp - 23;
     if ((a & FILTER_SIGN) != 0)
         r *= -1;
     return r;
@@ -72,15 +64,17 @@ mint fixsfsi(mfloat a)
 
 mfloat negsf2(mfloat a)
 {
-    mint neg = ~(a & FILTER_SIGN) & (a & (FILTER_EXP | FILTER_FRACT));
+    mfloat neg = a ^ FILTER_SIGN;
 
     return neg;
 }
 
 mfloat addsf3(mfloat a, mfloat b)
 {
-    if ((b == (mfloat)0) && (a == (mfloat)0))
-        return (mfloat)0;
+    if ((b == (mfloat)0))
+        return a;
+    if ((a == (mfloat)0))
+        return b;
 
     mint exp_a = (a & FILTER_EXP) >> 23;
     mint exp_b = (b & FILTER_EXP) >> 23;
@@ -88,11 +82,6 @@ mfloat addsf3(mfloat a, mfloat b)
     mint fract_b = (b & FILTER_FRACT) + (1 << 23);
     mint sign_a = (a & FILTER_SIGN) >> 31;
     mint sign_b = (b & FILTER_SIGN) >> 31;
-    printf("exp_a: ");
-    printBinary(exp_a);
-    printf("exp_b: ");
-    printBinary(exp_b);
-
     mint fract, exp, sign;
 
     if (exp_a > exp_b)
@@ -102,23 +91,13 @@ mfloat addsf3(mfloat a, mfloat b)
         sign = sign_a;
         if (sign_a == sign_b)
         {
-            printf("fract_a: ");
-            printBinary(fract_a);
-            printf("fract_b: ");
-            printBinary(fract_b);
             fract = fract_a + fract_b;
-            printf("fract: ");
-            printBinary(fract);
             while ((fract & (1 << 24)) == (1 << 24))
             {
                 exp++;
                 fract >>= 1;
-                printf("fract: ");
-                printBinary(fract);
             }
             fract = fract & FILTER_FRACT;
-            printf("fract: ");
-            printBinary(fract);
         }
         else
         {
@@ -128,8 +107,6 @@ mfloat addsf3(mfloat a, mfloat b)
             {
                 exp--;
                 fract <<= 1;
-                printf("fract: ");
-                printBinary(fract);
             }
             fract = fract & FILTER_FRACT;
         }
@@ -147,12 +124,8 @@ mfloat addsf3(mfloat a, mfloat b)
             {
                 exp++;
                 fract >>= 1;
-                printf("fract: ");
-                printBinary(fract);
             }
             fract = fract & FILTER_FRACT;
-            printf("fract: ");
-            printBinary(fract);
         }
         else
         {
@@ -162,14 +135,14 @@ mfloat addsf3(mfloat a, mfloat b)
             {
                 exp--;
                 fract <<= 1;
-                printf("fract: ");
-                printBinary(fract);
             }
             fract = fract & FILTER_FRACT;
         }
     }
     else
     {
+        exp = exp_b;
+        sign = sign_b;
         if (sign_a == sign_b)
         {
             fract = fract_a + fract_b;
@@ -177,12 +150,8 @@ mfloat addsf3(mfloat a, mfloat b)
             {
                 exp++;
                 fract >>= 1;
-                printf("fract: ");
-                printBinary(fract);
             }
             fract = fract & FILTER_FRACT;
-            printf("fract: ");
-            printBinary(fract);
         }
         else
         {
@@ -203,8 +172,6 @@ mfloat addsf3(mfloat a, mfloat b)
             {
                 exp--;
                 fract <<= 1;
-                printf("fract: ");
-                printBinary(fract);
             }
             fract = fract & FILTER_FRACT;
         }
@@ -215,6 +182,6 @@ mfloat addsf3(mfloat a, mfloat b)
 
 mfloat subsf3(mfloat a, mfloat b)
 {
-    // TODO: retorna a subtração entre a e b
-    return 0;
+
+    return addsf3(a, negsf2(b));
 }
