@@ -53,6 +53,8 @@ mint fixsfsi(mfloat a)
     r &= FILTER_FRACT;
     r |= (1 << 23);
     exp -= 127;
+    if (exp < 0)
+        return 0;
     if (exp >= 23)
     {
         r <<= (exp - 23);
@@ -90,97 +92,81 @@ mfloat addsf3(mfloat a, mfloat b)
 
     if (exp_a > exp_b)
     {
-        fract_b >>= (exp_a - exp_b);
         exp = exp_a;
         sign = sign_a;
+        fract_b >>= (exp_a - exp_b);
         if (sign_a == sign_b)
         {
             fract = fract_a + fract_b;
-            while ((fract & (1 << 24)) == (1 << 24))
-            {
-                exp++;
-                fract >>= 1;
-            }
-            fract = fract & FILTER_FRACT;
         }
         else
         {
             fract = fract_a - fract_b;
-
-            while ((fract & (1 << 23)) != (1 << 23))
-            {
-                exp--;
-                fract <<= 1;
-            }
-            fract = fract & FILTER_FRACT;
         }
     }
-
     else if (exp_a < exp_b)
     {
-        fract_a >>= (exp_b - exp_a);
         exp = exp_b;
         sign = sign_b;
+        fract_a >>= (exp_b - exp_a);
         if (sign_a == sign_b)
         {
             fract = fract_a + fract_b;
-            while ((fract & (1 << 24)) == (1 << 24))
-            {
-                exp++;
-                fract >>= 1;
-            }
-            fract = fract & FILTER_FRACT;
         }
         else
         {
             fract = fract_b - fract_a;
-
-            while ((fract & (1 << 23)) != (1 << 23))
-            {
-                exp--;
-                fract <<= 1;
-            }
-            fract = fract & FILTER_FRACT;
         }
     }
     else
     {
-        exp = exp_b;
-        sign = sign_b;
-        if (sign_a == sign_b)
+        if (fract_a >= fract_b)
         {
-            fract = fract_a + fract_b;
-            while ((fract & (1 << 24)) == (1 << 24))
+            if (sign_a == sign_b)
             {
-                exp++;
-                fract >>= 1;
-            }
-            fract = fract & FILTER_FRACT;
-        }
-        else
-        {
-            if (fract_b > fract_a)
-            {
-                fract = fract_b - fract_a;
-            }
-            else if (fract_b < fract_a)
-            {
-                fract = fract_a - fract_b;
+                fract = fract_a + fract_b;
+                sign = sign_a;
             }
             else
             {
-                return 0;
+                fract = fract_a - fract_b;
+                sign = sign_a;
             }
-
-            while ((fract & (1 << 23)) != (1 << 23))
+        }
+        else if (fract_a < fract_b)
+        {
+            if (sign_a == sign_b)
             {
-                exp--;
-                fract <<= 1;
+                fract = fract_a + fract_b;
+                sign = sign_b;
             }
-            fract = fract & FILTER_FRACT;
+            else
+            {
+                fract = fract_b - fract_a;
+                sign = sign_b;
+            }
         }
     }
 
+    if (fract == 0)
+        return 0;
+
+    if ((fract & (1 << 23)) != 0)
+    {
+        while (((fract & (1 << 23)) != (1 << 23)) & exp > 0)
+        {
+            fract <<= 1;
+            fract += 1;
+            exp--;
+        }
+    }
+    else
+    {
+        fract >>= 1;
+        exp++;
+    }
+
+    fract &= FILTER_FRACT;
     return (sign << 31) | (exp << 23) | fract;
 }
 
