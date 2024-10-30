@@ -50,13 +50,17 @@ mint fixsfsi(mfloat a)
         return (mint)0;
     mint r = a;
     mint exp = (a & FILTER_EXP) >> 23;
-    exp -= 127;
     r &= FILTER_FRACT;
-    r += (1 << 23);
-    if (exp < 23)
-        r >>= 23 - exp;
+    r |= (1 << 23);
+    exp -= 127;
+    if (exp >= 23)
+    {
+        r <<= (exp - 23);
+    }
     else
-        r <<= exp - 23;
+    {
+        r >>= (23 - exp);
+    }
     if ((a & FILTER_SIGN) != 0)
         r *= -1;
     return r;
