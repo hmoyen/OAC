@@ -1,181 +1,220 @@
-#include <inttypes.h>
-#include <stdio.h>
-#include <stdlib.h>
-typedef int32_t mint;
-typedef uint32_t mfloat;
-
-mint *convert_I2B(mint i);
-mfloat floatsisf(mint i);
-mint convert_B2I(mint *b, int size);
-mint power(a, int i);
-void print_32bit_array(mint *b);
-mfloat convert_B2F(mint *r, int size);
-mint *convert_F2B(mfloat f);
-mint fixsfsi(mfloat a);
-
+#include "float_lib.h"
+#define FILTER_EXP 0x7F800000
+#define FILTER_SIGN 0x80000000
+#define FILTER_FRACT 0x7FFFFF
+#define FILTER_32 0xFFFFFF
+void printBinary(int num);
 int main()
 {
+    mfloat c = floatsisf(999);
+    mfloat d = floatsisf(-1000);
+    int a = addsf3(c, d);
+    printf("result: %d\n", fixsfsi(a));
 
+    printBinary(a);
     return 0;
 }
 
-mint *convert_I2B(mint i) // bit-sign convertion
+void printBinary(int num)
 {
-    static mint b[32];
-    mint temp_i;
-    if (i < 0)
-    {
-        temp_i = -i;
-        b[31] = 1;
-    }
-    else
-    {
-        temp_i = i;
-        b[31] = 0;
-    }
+    // O tamanho em bits de um inteiro
+    int bits = sizeof(num) * 8;
 
-    for (int j = 0; j < 31; j++)
+    for (int i = bits - 1; i >= 0; i--)
     {
-        b[j] = 0;
+        // Cria um bit a partir da posição atual
+        int bit = (num >> i) & 1;
+        printf("%d", bit);
     }
-    for (int j = 0; j < 31; j++)
-    {
-        b[j] = temp_i % 2;
-        temp_i = temp_i / 2;
-    }
-    return b;
-}
-
-mint *convert_F2B(mfloat f)
-{
-    static mint p[32];
-    mfloat temp_f = f;
-    if (f >> 31 == 0)
-        p[31] = 0;
-
-    else
-        p[31] = 1;
-
-    for (int j = 0; j < 31; j++)
-        p[j] = 0;
-    for (int j = 0; j < 31; j++)
-    {
-        p[j] = temp_f % 2;
-        temp_f = temp_f / 2;
-    }
-    return p;
-}
-
-mint convert_B2I(mint *b, int size)
-{
-    mint r = 0;
-    for (int i = 0; i <= size; i++)
-    {
-        r += b[i] * power(2, i);
-    }
-    return r;
-}
-
-mfloat convert_B2F(mint *r, int size)
-{
-    mfloat f = 0;
-    for (int i = 0; i <= size; i++)
-    {
-        f += r[i] * power(2, i);
-    }
-    return f;
+    printf("\n");
 }
 
 mfloat floatsisf(mint i)
 {
-    if (i == 0)
-        return 0;
-    mint *r = (mint *)calloc(32, sizeof(mint));
-    mint *b = convert_I2B(i); // find binary for easier convertion
-    r[31] = b[31];
-    int exp = 127;
-    int fract = 0;
-    int j;
-
-    for (j = 30; j >= 0; j--)
+    mint sign = 0;
+    mint exp = 31; // indo da posiscao [31] do vetor
+    mint fract;
+    mint i_local = i;
+    if (i == (mint)0)
     {
-        if (b[j] != 0) // first non-zero bit for rounding
-            break;
-    }
-
-    exp += j;
-    b[j] = 0; // remove the first 1
-    fract = convert_B2I(b, j);
-    if (j > 23)
-    {
-        fract = fract >> (j - 23);
-    }
-    else
-    {
-        fract = fract << (23 - j);
-    }
-    b = convert_I2B(fract);
-    for (j = 0; j < 23; j++)
-    {
-        r[j] = b[j];
-    }
-    b = convert_I2B(exp);
-    for (j = 23; j < 31; j++)
-    {
-        r[j] = b[j - 23];
-    }
-    mfloat f = convert_B2F(r, 32);
-    free(r);
-    return f;
-}
-
-mint power(int a, int i)
-{
-    int r = 1;
-    for (int j = 0; j < i; j++)
-    {
-        r *= a;
+        return (mfloat)0;
     }
     if (i < 0)
     {
-        return 1 / r;
+        sign = 1;
+        i_local = -i;
     }
-    return r;
-}
-
-void print_32bit_array(mint *b)
-{
-
-    printf("\n");
-    for (int j = 31; j >= 0; j--)
+    while ((i_local & (1 << 31)) != (1 << 31)) // a partir do primeiro bit do numero, (i[31]), vai shiftando o numero ate que encontre-se o MSB == 1
     {
-        printf("%d", b[j]);
+        i_local <<= 1;
+        exp--; // enquanto nao for achado a casa do maior 1, o expoente vai diminuindo
     }
-    printf("\n");
-    return;
+
+    fract = (i_local >> 8) & FILTER_FRACT;
+    exp += 127;
+    return (sign << 31) | (exp << 23) | fract;
 }
 
 mint fixsfsi(mfloat a)
 {
-    mint *r = convert_F2B(a);
-    mint fract_a[24];
-    mint exp_a[8];
-    mint p;
-
-    int j;
-    for (j = 0; j < 23; j++)
-        fract_a[j] = r[j];
-    fract_a[23] = 1;
-
-    for (; j < 30; j++)
-        exp_a[j - 23] = r[j];
-    mint exp = convert_B2I(exp_a, 8);
-    if (exp < 127)
-        return 0;
+    if (a == (mfloat)0)
+        return (mint)0;
+    mint r = a;
+    mint exp = (a & FILTER_EXP) >> 23;
     exp -= 127;
+    r &= FILTER_FRACT;
+    r += (1 << 23);
+    r >>= 23 - exp;
+    if ((a & FILTER_SIGN) != 0)
+        r *= -1;
+    return r;
+}
 
-    for (j = 0; j < exp; j++)
+mfloat negsf2(mfloat a)
+{
+    mint neg = ~(a & FILTER_SIGN) & (a & (FILTER_EXP | FILTER_FRACT));
+
+    return neg;
+}
+
+mfloat addsf3(mfloat a, mfloat b)
+{
+    if ((b == (mfloat)0) && (a == (mfloat)0))
+        return (mfloat)0;
+
+    mint exp_a = (a & FILTER_EXP) >> 23;
+    mint exp_b = (b & FILTER_EXP) >> 23;
+    mint fract_a = (a & FILTER_FRACT) + (1 << 23);
+    mint fract_b = (b & FILTER_FRACT) + (1 << 23);
+    mint sign_a = (a & FILTER_SIGN) >> 31;
+    mint sign_b = (b & FILTER_SIGN) >> 31;
+    printf("exp_a: ");
+    printBinary(exp_a);
+    printf("exp_b: ");
+    printBinary(exp_b);
+
+    mint fract, exp, sign;
+
+    if (exp_a > exp_b)
     {
-        p += (power(-1, r[31])) * fract_a[j] * power(2, j);
+        fract_b >>= (exp_a - exp_b);
+        exp = exp_a;
+        sign = sign_a;
+        if (sign_a == sign_b)
+        {
+            printf("fract_a: ");
+            printBinary(fract_a);
+            printf("fract_b: ");
+            printBinary(fract_b);
+            fract = fract_a + fract_b;
+            printf("fract: ");
+            printBinary(fract);
+            while ((fract & (1 << 24)) == (1 << 24))
+            {
+                exp++;
+                fract >>= 1;
+                printf("fract: ");
+                printBinary(fract);
+            }
+            fract = fract & FILTER_FRACT;
+            printf("fract: ");
+            printBinary(fract);
+        }
+        else
+        {
+            fract = fract_a - fract_b;
+
+            while ((fract & (1 << 23)) != (1 << 23))
+            {
+                exp--;
+                fract <<= 1;
+                printf("fract: ");
+                printBinary(fract);
+            }
+            fract = fract & FILTER_FRACT;
+        }
     }
+
+    else if (exp_a < exp_b)
+    {
+        fract_a >>= (exp_b - exp_a);
+        exp = exp_b;
+        sign = sign_b;
+        if (sign_a == sign_b)
+        {
+            fract = fract_a + fract_b;
+            while ((fract & (1 << 24)) == (1 << 24))
+            {
+                exp++;
+                fract >>= 1;
+                printf("fract: ");
+                printBinary(fract);
+            }
+            fract = fract & FILTER_FRACT;
+            printf("fract: ");
+            printBinary(fract);
+        }
+        else
+        {
+            fract = fract_b - fract_a;
+
+            while ((fract & (1 << 23)) != (1 << 23))
+            {
+                exp--;
+                fract <<= 1;
+                printf("fract: ");
+                printBinary(fract);
+            }
+            fract = fract & FILTER_FRACT;
+        }
+    }
+    else
+    {
+        if (sign_a == sign_b)
+        {
+            fract = fract_a + fract_b;
+            while ((fract & (1 << 24)) == (1 << 24))
+            {
+                exp++;
+                fract >>= 1;
+                printf("fract: ");
+                printBinary(fract);
+            }
+            fract = fract & FILTER_FRACT;
+            printf("fract: ");
+            printBinary(fract);
+        }
+        else
+        {
+            if (fract_b > fract_a)
+            {
+                fract = fract_b - fract_a;
+            }
+            else if (fract_b < fract_a)
+            {
+                fract = fract_a - fract_b;
+            }
+            else
+            {
+                return 0;
+            }
+
+            while ((fract & (1 << 23)) != (1 << 23))
+            {
+                exp--;
+                fract <<= 1;
+                printf("fract: ");
+                printBinary(fract);
+            }
+            fract = fract & FILTER_FRACT;
+        }
+    }
+
+    return (sign << 31) | (exp << 23) | fract;
+}
+
+mfloat subsf3(mfloat a, mfloat b)
+{
+    // TODO: retorna a subtração entre a e b
+    return 0;
 }
