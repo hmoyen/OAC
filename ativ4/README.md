@@ -35,7 +35,9 @@ Serão implementadas então:
   - [ ] Unidade de controle principal
   - [ ] Memória de dados
   - [ ] Memória de instruções
-  - [ ] Banco de registradores
+  - [X] Banco de registradores
+  - [X] Registrador de instruções
+  - [X] Mux genérico
   - [ ] Gerador de imediato
   
    
