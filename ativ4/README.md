@@ -33,8 +33,8 @@ Serão implementadas então:
       - [X] Aritimética
     - [X] Unidade de controle
   - [ ] Unidade de controle principal
-  - [ ] Memória de dados
-  - [ ] Memória de instruções
+  - [-] Memória de dados
+  - [-] Memória de instruções
   - [X] Banco de registradores
   - [X] Registrador de instruções
   - [X] Mux genérico
