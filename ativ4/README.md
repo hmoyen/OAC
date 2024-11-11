@@ -38,6 +38,6 @@ Serão implementadas então:
   - [X] Banco de registradores
   - [X] Registrador de instruções
   - [X] Mux genérico
-  - [ ] Gerador de imediato
+  - [X] Gerador de imediato
   
    
