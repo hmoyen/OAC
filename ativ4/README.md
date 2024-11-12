@@ -2,25 +2,20 @@
 
 ## Projeto
 Para essa atividade, decidiu-se criar um RISC-V 32 bit para atender à ativade de criar uma versão em pipeline do processador. Devido à possível complexidade que uma implementação de RISC-V pode haver, serão implementadas apenas um conjunto específico e fechado de instruções, para otimizar o tempo do trabalho.
+O projeto no [Canva](https://www.canva.com/design/DAGWMdZUrac/1541PILC9_Dn8_2RG12VUg/edit?utm_content=DAGWMdZUrac&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) da abstração do processador também foi criado.
 Serão implementadas as seguintes intruções:
-
+- [X] Diagrama Alto-nível
 - Lógica e Aritmética:
   - [ ] add
-  - [ ] addi
   - [ ] sub
   - [ ] or
   - [ ] and
-  - [ ] xor
 - Branch:
   - [ ] beq
-  - [ ] blt
-  - [ ] bge
 - Store:
   - [ ] sw
-  - [ ] sb
 - Load:
   - [ ] lw
-  - [ ] sw
  
 ## Passo a passo
 

@@ -1,4 +1,4 @@
-module memory_file(
+module memory_inst(
     input   [31:0]  addr,       // address
     input   [31:0]  Din,        // data input
     input           we,         // write enable
