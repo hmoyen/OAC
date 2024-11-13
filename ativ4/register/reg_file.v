@@ -23,12 +23,12 @@ module ref_file (
         if(we == 1'b1) we_reg[rw] <= 1'b1;  // case for WE in a selected register
     end
 
-    mod_reg x0 (.in(32'b0), .clk(clk), .load(1'b1), .out(r_out[0]));    // x0
+    mod_reg x0 (.in(32'b0), .clk(clk), .load(1'b1), .out(r_out[0]), .reset(1'b0));    // x0
 
     genvar i;       // creating all the registers
     generate    
         for(i = 1; i < 32; i = i+1) begin
-            mod_reg xI (.in(Din), .clk(clk), .load(we_reg[i]), .out(r_out[i])); // xI
+            mod_reg xI (.in(Din), .clk(clk), .load(we_reg[i]), .out(r_out[i]), .reset(1'b0)); // xI
         end
     endgenerate
     
