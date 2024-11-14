@@ -3,7 +3,7 @@ module alu_dp (
     input   [31:0]    A,
     input   [31:0]    B,
     output  [3: 0]    flags,
-    output  [31:0]    R,
+    output  [31:0]    R
 );
 
     wire eq, lt, gt;

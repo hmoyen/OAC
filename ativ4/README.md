@@ -27,12 +27,16 @@ Serão implementadas então:
       - [X] Lógica
       - [X] Aritimética
     - [X] Unidade de controle
-  - [ ] Unidade de controle principal
-  - [-] Memória de dados
-  - [-] Memória de instruções
+  - [X] Unidade de controle principal
+  - [X] Memória de dados
+  - [X] Memória de instruções
   - [X] Banco de registradores
   - [X] Registrador de instruções
   - [X] Mux genérico
   - [X] Gerador de imediato
+
+Para compilar, com o Ícarus Verilog, digitar ```iverilog -c riscv_compile.txt```
+
+## Testbench
   
    

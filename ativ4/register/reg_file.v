@@ -2,11 +2,11 @@ module ref_file (
     input   [4:0]   ra,     
     input   [4:0]   rb,         
     input           we,     // write enable             
-    input   [63:0]  Din,       
+    input   [31:0]  Din,       
     input   [4: 0]  rw,     // register write        
     input           clk,              
-    output  [63:0]  DoutA, 
-    output  [63:0]  DoutB  
+    output  [31:0]  DoutA, 
+    output  [31:0]  DoutB  
 );
 
     wire [31:0] r_out [31:0];   // 32x 32 bit registers

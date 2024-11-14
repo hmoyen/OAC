@@ -32,7 +32,7 @@ always @(*) begin
                     op <= add;
                 end
                 7'b0100000: begin   // sub
-                    op <= _sub;
+                    op <= sub;
                 end
                 7'bxxxx111: begin   // and
                     op <= _and;
@@ -64,5 +64,6 @@ end
                     funct7e3[2:0] == 3'b000 ? flags[1]:  // beq (A == B)
                     funct7e3[2:0] == 3'b100 ? flags[2]:  // blt (A <  B)
                     funct7e3[2:0] == 3'b101 ? flags[3]:  // bgt (A >  B)
+                    1'b0;
 
 endmodule

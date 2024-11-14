@@ -37,11 +37,11 @@ wire [4 :0] addr_ra, addr_rb, addr_rd;
 wire [6 :0] funct7e3;
 
 add_sub32 ADD (
-    .op         ( 1'b0    ),
-    .A          ( 1'b1    ),
-    .B          ( pc_out  ),
-    .R          ( add_out ),
-    .carryOut   (         )
+    .op         ( 1'b0              ),
+    .A          ( {31'b0,1'b1}      ),
+    .B          ( pc_out            ),
+    .R          ( add_out           ),
+    .carryOut   (                   )
 );
 
 mux_4 MUX_3 (
@@ -97,14 +97,14 @@ mux_4 MUX_4 (
 );
 
 ref_file REG(
-    ra          ( addr_ra           ),     
-    rb          ( addr_rb           ),         
-    we          ( reg_file_write    ),                
-    Din         ( mux_2_out         ),       
-    rw          ( addr_rd           ),             
-    clk         ( clk               ),              
-    DoutA       ( reg_out_a         ), 
-    DoutB       ( reg_out_b         )  
+    .ra          ( addr_ra           ),     
+    .rb          ( addr_rb           ),         
+    .we          ( reg_file_write    ),                
+    .Din         ( mux_2_out         ),       
+    .rw          ( addr_rd           ),             
+    .clk         ( clk               ),              
+    .DoutA       ( reg_out_a         ), 
+    .DoutB       ( reg_out_b         )  
 );
 
 mux_4 MUX_1 (
@@ -142,7 +142,7 @@ alu_dp ALU_DP (
     .A        ( mux_1_out ),
     .B        ( mux_2_out ),
     .flags    ( flags     ),
-    .R        ( alu_out   ),
+    .R        ( alu_out   )
 );
 
 

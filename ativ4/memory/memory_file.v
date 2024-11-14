@@ -20,7 +20,7 @@ module memory_file(
 
     always@(posedge clk) begin
         if(we == 1'b1) begin
-            memory[address] <= Din;
+            memory[addr] <= Din;
         end
     end
 

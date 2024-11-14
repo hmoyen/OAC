@@ -1,10 +1,10 @@
 module mux_4 (
-    input [1:0]     select,
-    input           D0,
-    input           D1,
-    input           D2,
-    input           D3,
-    output          out
+    input  [1 :0]    select,
+    input  [31:0]    D0,
+    input  [31:0]    D1,
+    input  [31:0]   D2,
+    input  [31:0]   D3,
+    output [31:0]   out
 );
 
 assign out = ( select == 2'd0   ) ? D0 : 
