@@ -16,3 +16,4 @@ register\reg_file.v
 riscv_dp.v
 riscv_uc.v
 riscv.v
+riscv_tb.v
