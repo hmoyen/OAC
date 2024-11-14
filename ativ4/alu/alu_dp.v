@@ -8,7 +8,7 @@ module alu_dp (
 
     wire eq, lt, gt;
 
-    wire opAddSub = op[1];
+    wire opAddSub = op[0];
     wire [31:0] resultAddSub;
 
     wire [31:0] resultOr;

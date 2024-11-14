@@ -5,16 +5,16 @@ Para essa atividade, decidiu-se criar um RISC-V 32 bit para atender à ativade d
 O projeto no [Canva](https://www.canva.com/design/DAGWMdZUrac/1541PILC9_Dn8_2RG12VUg/edit?utm_content=DAGWMdZUrac&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) da abstração do processador também foi criado.
 Serão implementadas as seguintes intruções:
 - [X] Diagrama Alto-nível
-- Lógica e Aritmética:
-  - [ ] add
-  - [ ] sub
-  - [ ] or
-  - [ ] and
-- Branch:
-  - [ ] beq
-- Store:
-  - [ ] sw
-- Load:
+- Lógica e Aritmética (R):
+  - [X] add
+  - [X] sub
+  - [X] or
+  - [X] and
+- Branch (SB):
+  - [X] beq
+- Store (S):
+  - [X] sw
+- Load (I):
   - [X] lw
  
 ## Passo a passo

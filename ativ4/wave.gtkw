@@ -1,22 +1,24 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Thu Nov 14 18:13:40 2024
+[*] Thu Nov 14 20:27:39 2024
 [*]
 [dumpfile] "C:\Users\caioe\Documents\Projetos\OAC\ativ4\riscv_tb.vcd"
-[dumpfile_mtime] "Thu Nov 14 18:12:41 2024"
-[dumpfile_size] 50069
+[dumpfile_mtime] "Thu Nov 14 20:27:01 2024"
+[dumpfile_size] 69355
 [savefile] "C:\Users\caioe\Documents\Projetos\OAC\ativ4\wave.gtkw"
-[timestart] 0
+[timestart] 4258000
 [size] 1536 793
-[pos] -35 -35
-*-18.000000 301000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] -9 -9
+*-19.000000 5688000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] riscv_tb.
 [treeopen] riscv_tb.riscv.
 [treeopen] riscv_tb.riscv.DP.
 [treeopen] riscv_tb.riscv.DP.ALU_DP.
 [treeopen] riscv_tb.riscv.DP.REG.
 [treeopen] riscv_tb.riscv.DP.REG.genblk1[3].
-[sst_width] 197
+[treeopen] riscv_tb.riscv.DP.REG.genblk1[6].
+[treeopen] riscv_tb.riscv.DP.REG.genblk1[7].
+[sst_width] 256
 [signals_width] 240
 [sst_expanded] 1
 [sst_vpaned_height] 463
@@ -72,7 +74,7 @@ riscv_tb.riscv.DP.funct7e3[6:0]
 @28
 [color] 2
 riscv_tb.riscv.UC.reg_file_write
-@22
+@420
 [color] 7
 riscv_tb.riscv.DP.addr_ra[4:0]
 [color] 7
@@ -106,9 +108,8 @@ riscv_tb.riscv.UC.select_mux_4[1:0]
 riscv_tb.riscv.DP.MUX_4.out[31:0]
 @200
 -reg file
-@24
+@420
 riscv_tb.riscv.DP.REG.Din[31:0]
-@22
 riscv_tb.riscv.DP.REG.DoutA[31:0]
 riscv_tb.riscv.DP.REG.DoutB[31:0]
 @28
@@ -118,12 +119,13 @@ riscv_tb.riscv.DP.REG.we
 riscv_tb.riscv.DP.REG.rw[4:0]
 @200
 -alu
-@22
+@420
 riscv_tb.riscv.DP.ALU_DP.A[31:0]
 riscv_tb.riscv.DP.ALU_DP.B[31:0]
+@22
 riscv_tb.riscv.DP.ALU_DP.R[31:0]
-riscv_tb.riscv.DP.ALU_DP.flags[3:0]
 @28
+riscv_tb.riscv.DP.ALU_DP.flags[3:0]
 riscv_tb.riscv.DP.ALU_DP.op[2:0]
 @200
 -immediate

@@ -17,7 +17,9 @@ module memory_file(
             memory[i] = 32'b0; 
         end   
 
-        memory[3] = 32'd17;   
+        memory[3] = 32'd17;  
+        memory[7] = 32'd5;
+        memory[18] = 32'd99;
     end
 
     always@(posedge clk) begin

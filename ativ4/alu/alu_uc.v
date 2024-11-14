@@ -61,9 +61,9 @@ end
     // flags[3]: A > B
 
     assign branch = funct7e3[2:0] == 3'b001 ? flags[0]:  // bne (A != B)
-                    funct7e3[2:0] == 3'b000 ? flags[1]:  // beq (A == B)
-                    funct7e3[2:0] == 3'b100 ? flags[2]:  // blt (A <  B)
-                    funct7e3[2:0] == 3'b101 ? flags[3]:  // bgt (A >  B)
-                    1'b0;
+                    (funct7e3[2:0] == 3'b000 ? flags[1]:  // beq (A == B)
+                    (funct7e3[2:0] == 3'b100 ? flags[2]:  // blt (A <  B)
+                    (funct7e3[2:0] == 3'b101 ? flags[3]:  // bgt (A >  B)
+                    1'b0)));
 
 endmodule

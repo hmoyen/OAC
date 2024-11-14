@@ -85,28 +85,28 @@ module riscv_uc (
                 case (opcode)
                     7'b0110011: begin   // R-type
                         select_mux_1    <= 2'b0;    // ALU recieves RS2
-                        select_mux_2    <= 2'b0;    // Din recieves ALU output
+                        select_mux_2    <= 2'b1;    // Din recieves ALU output
                         alu_op          <= 2'b10;   // R-type
                         select_mux_3    <= 2'b0;
                         select_mux_4    <= 2'b0;
                     end    
                     7'b0000011: begin   // I-type
                         select_mux_1    <= 2'b1;    // ALU recieves Immediate
-                        select_mux_2    <= 2'b0;    // Din recieves ALU output
+                        select_mux_2    <= 2'b0;    // Din recieves MEM output
                         alu_op          <= 2'b01;   // I-type
                         select_mux_3    <= 2'b0;
                         select_mux_4    <= 2'b0;
                     end    
                     7'b0100011: begin   // S-type
                         select_mux_1    <= 2'b1;    // ALU recieves Immediate
-                        select_mux_2    <= 2'b0;    // Din recieves ALU output
+                        select_mux_2    <= 2'b0;    // Din neutral
                         alu_op          <= 2'b00;   // S-type
                         select_mux_3    <= 2'b0;
                         select_mux_4    <= 2'b01;
                     end    
                     7'b1100011: begin   // SB-type
-                        select_mux_1    <= 2'b1;    // ALU recieves Immediate
-                        select_mux_2    <= 2'b0;    // Din recieves ALU output
+                        select_mux_1    <= 2'b0;    // ALU recieves Immediate
+                        select_mux_2    <= 2'b0;    // Din neutral
                         alu_op          <= 2'b00;   // S-type
                         case (branch) 
                             1'b1: select_mux_3    <= 2'b01;
