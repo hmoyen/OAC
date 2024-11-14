@@ -15,7 +15,9 @@ module memory_file(
     initial begin                   // starting memory positions
         for(i = 0; i < size; i = i + 1) begin
             memory[i] = 32'b0; 
-        end      
+        end   
+
+        memory[3] = 32'd17;   
     end
 
     always@(posedge clk) begin

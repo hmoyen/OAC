@@ -118,8 +118,8 @@ mux_4 MUX_1 (
 
 mux_4 MUX_2 (
         .select     ( select_mux_2  ),
-        .D0         ( alu_out       ),
-        .D1         ( mem_out       ),
+        .D0         (  mem_out      ),
+        .D1         (  alu_out      ),
         .D2         (               ),
         .D3         (               ),
         .out        ( mux_2_out     )
@@ -139,8 +139,8 @@ alu_uc ALU_UC (
 
 alu_dp ALU_DP (
     .op       ( op        ),
-    .A        ( mux_1_out ),
-    .B        ( mux_2_out ),
+    .A        ( reg_out_a ),
+    .B        ( mux_1_out ),
     .flags    ( flags     ),
     .R        ( alu_out   )
 );
@@ -154,6 +154,8 @@ memory_file MEM(
     .clk        ( clk       ),
     .out        ( mem_out   )  
 );
+
+assign opcode = inst_out[6:0];
 
 
 endmodule

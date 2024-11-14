@@ -15,7 +15,7 @@ Serão implementadas as seguintes intruções:
 - Store:
   - [ ] sw
 - Load:
-  - [ ] lw
+  - [X] lw
  
 ## Passo a passo
 

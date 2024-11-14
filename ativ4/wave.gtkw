@@ -1,0 +1,133 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Thu Nov 14 18:13:40 2024
+[*]
+[dumpfile] "C:\Users\caioe\Documents\Projetos\OAC\ativ4\riscv_tb.vcd"
+[dumpfile_mtime] "Thu Nov 14 18:12:41 2024"
+[dumpfile_size] 50069
+[savefile] "C:\Users\caioe\Documents\Projetos\OAC\ativ4\wave.gtkw"
+[timestart] 0
+[size] 1536 793
+[pos] -35 -35
+*-18.000000 301000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] riscv_tb.
+[treeopen] riscv_tb.riscv.
+[treeopen] riscv_tb.riscv.DP.
+[treeopen] riscv_tb.riscv.DP.ALU_DP.
+[treeopen] riscv_tb.riscv.DP.REG.
+[treeopen] riscv_tb.riscv.DP.REG.genblk1[3].
+[sst_width] 197
+[signals_width] 240
+[sst_expanded] 1
+[sst_vpaned_height] 463
+@28
+[color] 2
+riscv_tb.riscv.UC.clk
+@200
+-memory
+@28
+[color] 1
+riscv_tb.riscv.mem_we
+[color] 1
+riscv_tb.riscv.mem_re
+@22
+[color] 4
+riscv_tb.riscv.DP.MEM.addr[31:0]
+[color] 6
+riscv_tb.riscv.DP.MEM.out[31:0]
+@28
+[color] 6
+riscv_tb.riscv.DP.MEM.re
+@22
+[color] 2
+riscv_tb.riscv.DP.MEM.Din[31:0]
+@28
+[color] 2
+riscv_tb.riscv.DP.MEM.we
+@200
+-instruction
+@22
+riscv_tb.riscv.opcode[6:0]
+@28
+riscv_tb.riscv.DP.inst_out[31:0]
+@200
+-state
+@22
+[color] 3
+riscv_tb.riscv.UC.currentState[4:0]
+@200
+-pc control
+@28
+riscv_tb.riscv.UC.pc_load
+riscv_tb.riscv.UC.pc_reset
+@22
+riscv_tb.riscv.DP.pc_out[31:0]
+@200
+-alu control
+@28
+riscv_tb.riscv.UC.alu_op[1:0]
+riscv_tb.riscv.DP.funct7e3[6:0]
+@200
+-reg control
+@28
+[color] 2
+riscv_tb.riscv.UC.reg_file_write
+@22
+[color] 7
+riscv_tb.riscv.DP.addr_ra[4:0]
+[color] 7
+riscv_tb.riscv.DP.addr_rb[4:0]
+riscv_tb.riscv.DP.addr_rd[4:0]
+@200
+-mux control
+@28
+[color] 3
+riscv_tb.riscv.UC.select_mux_1[1:0]
+@22
+[color] 3
+riscv_tb.riscv.DP.MUX_1.out[31:0]
+@28
+[color] 5
+riscv_tb.riscv.UC.select_mux_2[1:0]
+@22
+[color] 5
+riscv_tb.riscv.DP.MUX_2.out[31:0]
+@28
+[color] 2
+riscv_tb.riscv.UC.select_mux_3[1:0]
+@22
+[color] 2
+riscv_tb.riscv.DP.MUX_3.out[31:0]
+@28
+[color] 3
+riscv_tb.riscv.UC.select_mux_4[1:0]
+@22
+[color] 4
+riscv_tb.riscv.DP.MUX_4.out[31:0]
+@200
+-reg file
+@24
+riscv_tb.riscv.DP.REG.Din[31:0]
+@22
+riscv_tb.riscv.DP.REG.DoutA[31:0]
+riscv_tb.riscv.DP.REG.DoutB[31:0]
+@28
+riscv_tb.riscv.DP.REG.we_reg[31:0]
+riscv_tb.riscv.DP.REG.we
+@22
+riscv_tb.riscv.DP.REG.rw[4:0]
+@200
+-alu
+@22
+riscv_tb.riscv.DP.ALU_DP.A[31:0]
+riscv_tb.riscv.DP.ALU_DP.B[31:0]
+riscv_tb.riscv.DP.ALU_DP.R[31:0]
+riscv_tb.riscv.DP.ALU_DP.flags[3:0]
+@28
+riscv_tb.riscv.DP.ALU_DP.op[2:0]
+@200
+-immediate
+@22
+riscv_tb.riscv.DP.IMM.immediate[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

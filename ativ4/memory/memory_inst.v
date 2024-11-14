@@ -16,6 +16,9 @@ module memory_inst(
         for(i = 0; i < size; i = i + 1) begin
             memory[i] = 32'b0; 
         end      
+        //LW
+        //Estrutura da instrução de load = {imm[11:0], rs1, 010, rd, 0000011} -> RF[3] = 17
+        memory[0] = 32'b00000000001100000010000110000011;
     end
 
     always@(posedge clk) begin

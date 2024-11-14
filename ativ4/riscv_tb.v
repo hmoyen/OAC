@@ -1,11 +1,8 @@
-`timescale 1ns/1ns
-module riscv_tb;
-    
-    reg clk;
-    reg reset;
-    always #2 clk = ~clk;
+`timescale 1ns/100ps
 
-    riscv CPU (.reset(reset), .clk(clk));
+module riscv_tb();
+    reg clk, reset;
+    riscv riscv (.reset(reset), .clk(clk));
     initial begin
         $dumpfile("riscv_tb.vcd");
         $dumpvars(0, riscv_tb);
@@ -15,5 +12,5 @@ module riscv_tb;
         reset <= 1'b0;
         #40000 $finish;
     end
-
+    always #50 clk = ~clk;
 endmodule

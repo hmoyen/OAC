@@ -10,7 +10,7 @@ module add_sub32 (
     // op = 0 > adder
     // op = 1 > subtractor 2's complement
 
-    assign result = op ? A + B : A + ((~B) + 1); 
+    assign result = !op ? A + B : A + ((~B) + 1); 
 
     assign R = result[31:0];
 

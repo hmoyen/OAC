@@ -32,7 +32,7 @@ module ref_file (
         end
     endgenerate
     
-    assign doutA = r_out[ra];
-    assign doutB = r_out[rb];
+    assign DoutA = r_out[ra];
+    assign DoutB = r_out[rb];
 
 endmodule
