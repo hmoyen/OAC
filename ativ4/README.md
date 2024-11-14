@@ -35,8 +35,12 @@ Serão implementadas então:
   - [X] Mux genérico
   - [X] Gerador de imediato
 
-Para compilar, com o Ícarus Verilog, digitar ```iverilog -c riscv_compile.txt```
-
+Para compilar, com o Ícarus Verilog, digitar 
+```bash
+iverilog -c riscv_compile.txt
+vvp a.out
+gtkwave riscv_tb.vcd -a .\wave.gtkw
+```
 ## Testbench
   
    
