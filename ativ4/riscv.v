@@ -11,7 +11,6 @@ riscv_uc UC(
     .clk                ( clk               ),
     .reset              ( reset             ),
     .opcode             ( opcode            ),
-    .branch             ( branch            ),
     .pc_load            ( pc_load           ),
     .pc_reset           ( pc_reset          ),
     .mem_re             ( mem_re            ),
@@ -20,7 +19,6 @@ riscv_uc UC(
     .alu_op             ( alu_op            ),
     .select_mux_1       ( select_mux_1      ),
     .select_mux_2       ( select_mux_2      ),
-    .select_mux_3       ( select_mux_3      ),
     .select_mux_4       ( select_mux_4      )
 );  
 
