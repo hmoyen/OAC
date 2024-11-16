@@ -10,7 +10,7 @@ module memory_inst(
     integer i;
     parameter size = 256;
 
-    reg [31:0] memory [size - 1:0];   // memory = 256 positions array for 32 bits 
+    reg [size - 1:0][31:0] memory;   // memory = 256 positions array for 32 bits 
 
     initial begin                   // starting memory positions
         for(i = 0; i < size; i = i + 1) begin
