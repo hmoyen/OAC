@@ -3,6 +3,7 @@ module mem (
     input               reset,
     input               mem_we,
     input               mem_re,
+    input               branch_instruction,
     input               branch_in,
     input               reg_file_write_in,
     input       [31:0]  alu_out,
@@ -22,7 +23,7 @@ module mem (
     // Wire declarations
     wire [31:0] mem_data_out, mux_4_out;
 
-    assign select_mux_3_out = {1'b0,branch_in};
+    assign select_mux_3_out = {1'b0,branch_instruction & branch_in};
 
     mux_4 MUX_4 (
             .select     ( select_mux_4_in  ),
