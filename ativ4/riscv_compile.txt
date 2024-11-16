@@ -17,7 +17,9 @@ register/ex_mem_reg.v
 register/id_ex_reg.v
 register/mem_wb_reg.v
 stages/ex.v
+stages/ex_tb.v
+stages/mem.v
 riscv_dp.v
 riscv_uc.v
 riscv.v
-riscv_tb.v
+#riscv_tb.v

@@ -13,9 +13,6 @@ module ex (
     input       [31:0]  reg_in_b,
     input       [31:0]  immediate_in,
     input       [31:0]  pc_in,
-    input       [31:0]  alu_in,
-    input       [31:0]  add_pc_in,
-    input       [31:0]  add_in,
     output              mem_re_out,
     output              mem_we_out,
     output              reg_file_write_out,
@@ -30,6 +27,7 @@ module ex (
     wire [3:0] flags;
     wire [2:0] op;
     wire branch_in;
+    wire [31:0] alu_in, add_pc_in;
     wire [31:0] mux_1_out;
 
     // Instantiating mux1
