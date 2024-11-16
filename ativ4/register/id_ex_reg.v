@@ -7,6 +7,7 @@ module id_ex_reg (
     input               mem_we_in,
     input               reg_file_write_in,
     input       [1:0]   alu_op_in,
+    input       [4:0]   addr_rd_in,
     input       [1:0]   select_mux_1_in,
     input       [1:0]   select_mux_2_in,
     input       [1:0]   select_mux_4_in,
