@@ -1,0 +1,93 @@
+$date
+	Sun Nov 17 18:03:28 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module wb_tb $end
+$var wire 32 ! mux_2_out [31:0] $end
+$var wire 5 " addr_out [4:0] $end
+$var reg 5 # addr_rd [4:0] $end
+$var reg 32 $ alu_out [31:0] $end
+$var reg 32 % mem_out [31:0] $end
+$var reg 2 & select_mux_2 [1:0] $end
+$scope module utt $end
+$var wire 5 ' addr_out [4:0] $end
+$var wire 5 ( addr_rd [4:0] $end
+$var wire 32 ) alu_out [31:0] $end
+$var wire 32 * mem_out [31:0] $end
+$var wire 2 + select_mux_2 [1:0] $end
+$var wire 32 , mux_2_out [31:0] $end
+$scope module MUX_2 $end
+$var wire 32 - D0 [31:0] $end
+$var wire 32 . D1 [31:0] $end
+$var wire 32 / D2 [31:0] $end
+$var wire 32 0 D3 [31:0] $end
+$var wire 2 1 select [1:0] $end
+$var wire 32 2 out [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b10101010101010101010101010101010 2
+b0 1
+b0 0
+b0 /
+b1010101010101010101010101010101 .
+b10101010101010101010101010101010 -
+b10101010101010101010101010101010 ,
+b0 +
+b10101010101010101010101010101010 *
+b1010101010101010101010101010101 )
+b0 (
+b0 '
+b0 &
+b10101010101010101010101010101010 %
+b1010101010101010101010101010101 $
+b0 #
+b0 "
+b10101010101010101010101010101010 !
+$end
+#10000
+b10101 "
+b10101 '
+b10101 #
+b10101 (
+#30000
+b1010101010101010101010101010101 !
+b1010101010101010101010101010101 ,
+b1010101010101010101010101010101 2
+b11011 "
+b11011 '
+b11011 #
+b11011 (
+b1 &
+b1 +
+b1 1
+#50000
+b0 !
+b0 ,
+b0 2
+b11100 "
+b11100 '
+b11100 #
+b11100 (
+b10 &
+b10 +
+b10 1
+#70000
+b1 "
+b1 '
+b1 #
+b1 (
+b11 &
+b11 +
+b11 1
