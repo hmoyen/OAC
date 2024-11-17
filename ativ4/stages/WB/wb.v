@@ -1,13 +1,16 @@
 module wb (
+    input wire reg_file_write_in,
     input  wire [4:0] addr_rd,   // 5-bit input
     input  wire [1:0] select_mux_2, // Select input for mux_4
     input  wire [31:0] mem_out,  // 32-bit input to mux_4
     input  wire [31:0] alu_out,  // 32-bit input to mux_4
     output wire [31:0] mux_2_out, // 32-bit output from mux_4
-    output wire [4:0] addr_out   // 5-bit output (same as addr_rd)
+    output wire [4:0] addr_out,   // 5-bit output (same as addr_rd)
+    output wire reg_file_write_out
 );
 
     assign addr_out = addr_rd;
+    assign reg_file_write_out = reg_file_write_in;
 
     // Instantiate mux_4
     mux_4 MUX_2 (

@@ -25,7 +25,7 @@ mux_2 #(
 pc PC(
     .clock(clock),
     .reset(reset),
-    .stall(stall),
+    .load(pc_load),
     .pc_in(s_pc_in),
     .pc_out(s_pc_out)
 );

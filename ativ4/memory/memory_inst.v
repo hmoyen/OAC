@@ -61,9 +61,6 @@ module memory_inst(
         //if(reg[4] (5) == reg[6] (5)): então faz branch (OBS: nesse caso ocorre) imm = 16 
         memory[11] = 32'b0_000000_00100_00110_000_1000_0_1100011;
 
-
-
-
         
     end
 

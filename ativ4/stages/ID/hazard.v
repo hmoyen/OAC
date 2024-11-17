@@ -26,7 +26,7 @@ assign data_hazard = (((opcode == RTYPE) || (opcode == STYPE) || (opcode == SBTY
                      ((rs2 != 0) && ((rs2 == rd_ex_mem) || (rs2 == rd_mem_wb))));
 
 assign pc_load = ~(branch_instruction_controller || branch_instruction_id_ex || data_hazard);
-assign if_id_load = ~(data_hazard || branch_instruction_controller || branch_instruction_id_ex);
+assign if_id_load = ~(data_hazard || branch_instruction_id_ex);
 assign mux5_selector = data_hazard || branch_instruction_id_ex;
 
 endmodule
