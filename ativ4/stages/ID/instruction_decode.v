@@ -2,7 +2,6 @@ module instruction_decode(
     input clock,
     input reset,
     input write_enable,
-    input branch_instruction_id_ex,
     input [31:0] instruction,
     input [31:0] pc,
     input [31:0] Din,
@@ -22,14 +21,15 @@ module instruction_decode(
     output  [31:0]  reg_a_out,
     output  [31:0]  reg_b_out,
     output  [31:0]  immediate_out,
-    output  [31:0]  pc_out,           
+    output  [31:0]  pc_out,
+    output  [4:0]   addr_rd_out,           
     output  [6:0]   funct7e3_out
 );
 
 wire [4:0] s_ra, s_rb, s_rd;
 wire [31:0] s_out_a, s_out_b, s_immediate;
 wire s_pc_load, s_if_id_load, s_mux5_selector;
-wire mem_re_int, mem_we_int, reg_file_write_int, branch_instruction_int;
+wire mem_re_int, mem_we_int, reg_file_write_int, branch_instruction_int, branch_instruction_id_ex;
 wire [1:0] alu_op_int, select_mux_1_int, select_mux_2_int, select_mux_4_int;
 
 hazard HAZARD(
@@ -89,6 +89,8 @@ id_ex_reg ID_EX_REGISTER(
     .select_mux_4_in(s_mux5_selector ? 2'b0  : select_mux_4_int),
     .reg_a_in(s_out_a),
     .reg_b_in(s_out_b),
+    .addr_rd_in(s_rd),
+    .addr_rd_out(addr_rd_out),
     .immediate_in(s_immediate),
     .pc_in(pc),
     .funct7e3_in(instruction[31:25]),
@@ -103,6 +105,8 @@ id_ex_reg ID_EX_REGISTER(
     .reg_b_out(reg_b_out),
     .immediate_out(immediate_out),
     .pc_out(pc_out),
+    .branch_instruction_in(branch_instruction_int),
+    .branch_instruction_out(branch_instruction_id_ex),
     .funct7e3_out(funct7e3_out)
 );
 
@@ -111,6 +115,6 @@ assign s_rb = instruction[24:20];
 assign s_rd = instruction[11:7];
 assign pc_load = s_pc_load;
 assign if_id_load = s_if_id_load;
-assign branch_instruction = branch_instruction_int;
+assign branch_instruction = branch_instruction_id_ex;
 
 endmodule

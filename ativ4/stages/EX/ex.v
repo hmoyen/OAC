@@ -3,9 +3,11 @@ module ex (
     input               reset,
     input               mem_re_in,
     input               mem_we_in,
+    input               branch_instruction_in,
     input               reg_file_write_in,
     input       [6:0]   funct7e3,
     input       [1:0]   alu_op,
+    input       [4:0]   addr_rd_in,
     input       [1:0]   select_mux_1,
     input       [1:0]   select_mux_2_in,
     input       [1:0]   select_mux_4_in,
@@ -19,8 +21,10 @@ module ex (
     output              branch_out,
     output      [1:0]   select_mux_2_out,
     output      [1:0]   select_mux_4_out,
+    output      [4:0]   addr_rd_out,
     output      [31:0]  reg_b_out,
     output      [31:0]  alu_out,
+    output              branch_instruction_out,
     output      [31:0]  add_pc_out
     );
 
@@ -73,6 +77,10 @@ module ex (
         .reset              (reset),
         .mem_re_in          (mem_re_in),
         .mem_we_in          (mem_we_in),
+        .addr_rd_in         (addr_rd_in),
+        .addr_rd_out        (addr_rd_out),
+        .branch_instruction_in (branch_instruction_in),
+        .branch_instruction_out (branch_instruction_out),
         .reg_file_write_in  (reg_file_write_in),
         .branch_in          (branch_in),
         .select_mux_2_in    (select_mux_2_in),

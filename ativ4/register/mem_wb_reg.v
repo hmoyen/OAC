@@ -3,6 +3,7 @@ module mem_wb_reg (
     input               reset,
     input               branch_in,
     input               pc_load_in,
+    input        [4:0]  addr_rd_in,
     input               pc_reset_in,
     input               reg_file_write_in,
     input       [31:0]  add_pc_in,
@@ -15,6 +16,7 @@ module mem_wb_reg (
     output reg          pc_load_out,
     output reg          pc_reset_out,
     output reg          reg_file_write_out,
+    output reg  [4:0]   addr_rd_out,
     output reg  [31:0]  add_pc_out,
     output reg  [31:0]  add_out,
     output reg  [31:0]  mem_out,
@@ -30,6 +32,7 @@ module mem_wb_reg (
             pc_reset_out        <= 1'b0;
             reg_file_write_out  <= 1'b0;
             select_mux_2_out    <= 2'b0;
+            addr_rd_out         <= 5'b0;
 
             add_pc_out          <= 32'b0;
             add_out             <= 32'b0;
@@ -38,6 +41,7 @@ module mem_wb_reg (
         end else begin
             branch_out          <= branch_in;
             pc_load_out         <= pc_load_in;
+            addr_rd_out          <= addr_rd_in;
             pc_reset_out        <= pc_reset_in;
             reg_file_write_out  <= reg_file_write_in;
             select_mux_2_out    <= select_mux_2_in;

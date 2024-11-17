@@ -30,7 +30,6 @@ wire [31:0] pc_out,
             reg_out_a,
             reg_out_b;
 
-wire [1 :0] alu_op;
 wire [2 :0] op;
 wire [3 :0] flags;
 wire [4 :0] addr_ra, addr_rb, addr_rd;
