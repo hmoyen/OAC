@@ -85,7 +85,7 @@ id_ex_reg ID_EX_REGISTER(
     .reg_file_write_in(s_mux5_selector ? 1'b0  : reg_file_write_int),
     .alu_op_in(s_mux5_selector ? 2'b0  : alu_op_int),
     .select_mux_1_in(s_mux5_selector ? 2'b0  : select_mux_1_int),
-    .select_mux_2_in(ss_mux5_selector ? 2'b0  : elect_mux_2_int),
+    .select_mux_2_in(s_mux5_selector ? 2'b0  : select_mux_2_int),
     .select_mux_4_in(s_mux5_selector ? 2'b0  : select_mux_4_int),
     .reg_a_in(s_out_a),
     .reg_b_in(s_out_b),
