@@ -1,0 +1,95 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Sun Nov 17 19:39:36 2024
+[*]
+[dumpfile] "/home/victor/Documentos/USP/OAC_ATIV4/OAC/ativ4/instruction_decode.vcd"
+[dumpfile_mtime] "Sun Nov 17 19:37:59 2024"
+[dumpfile_size] 17333
+[savefile] "/home/victor/Documentos/USP/OAC_ATIV4/OAC/ativ4/instruction_decode_tb_wave.gtkw"
+[timestart] 20
+[size] 1920 1029
+[pos] -1 -1
+*-4.065407 107 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] instruction_decode_tb.
+[treeopen] instruction_decode_tb.ID.
+[treeopen] instruction_decode_tb.ID.REGISTER_FILE.
+[sst_width] 264
+[signals_width] 349
+[sst_expanded] 1
+[sst_vpaned_height] 298
+@24
+instruction_decode_tb.caso[4:0]
+@28
+instruction_decode_tb.clock
+instruction_decode_tb.reset
+@24
+instruction_decode_tb.pc[31:0]
+@23
+instruction_decode_tb.caso[4:0]
+@200
+-CONTROLLER
+@28
+[color] 1
+instruction_decode_tb.ID.CONTROLLER.mem_re
+[color] 1
+instruction_decode_tb.ID.CONTROLLER.mem_we
+[color] 1
+instruction_decode_tb.ID.CONTROLLER.reg_file_write
+[color] 1
+instruction_decode_tb.ID.CONTROLLER.select_mux_1[1:0]
+[color] 1
+instruction_decode_tb.ID.CONTROLLER.select_mux_2[1:0]
+[color] 1
+instruction_decode_tb.ID.CONTROLLER.select_mux_4[1:0]
+@200
+-HAZARD
+@22
+instruction_decode_tb.ID.HAZARD.rs1[4:0]
+instruction_decode_tb.ID.HAZARD.rs2[4:0]
+instruction_decode_tb.ID.HAZARD.rd_ex_mem[4:0]
+instruction_decode_tb.ID.HAZARD.rd_mem_wb[4:0]
+@28
+instruction_decode_tb.ID.HAZARD.branch_instruction_controller
+instruction_decode_tb.ID.HAZARD.branch_instruction_id_ex
+instruction_decode_tb.ID.HAZARD.pc_load
+instruction_decode_tb.ID.HAZARD.if_id_load
+instruction_decode_tb.ID.HAZARD.mux5_selector
+@200
+-IMM_GENERATOR
+@24
+instruction_decode_tb.ID.IMMEDIATE.immediate[31:0]
+@200
+-REGISTER FILE
+@24
+instruction_decode_tb.ID.REGISTER_FILE.ra[4:0]
+instruction_decode_tb.ID.REGISTER_FILE.rb[4:0]
+instruction_decode_tb.ID.REGISTER_FILE.rw[4:0]
+@28
+instruction_decode_tb.ID.REGISTER_FILE.we
+@24
+instruction_decode_tb.ID.REGISTER_FILE.Din[31:0]
+instruction_decode_tb.ID.REGISTER_FILE.DoutA[31:0]
+instruction_decode_tb.ID.REGISTER_FILE.DoutB[31:0]
+@200
+-REG ID EX
+@28
+instruction_decode_tb.ID.ID_EX_REGISTER.alu_op_out[1:0]
+@22
+instruction_decode_tb.ID.ID_EX_REGISTER.funct7e3_out[6:0]
+@24
+instruction_decode_tb.ID.ID_EX_REGISTER.immediate_out[31:0]
+@28
+instruction_decode_tb.ID.ID_EX_REGISTER.mem_re_out
+instruction_decode_tb.ID.ID_EX_REGISTER.mem_we_out
+@24
+instruction_decode_tb.ID.ID_EX_REGISTER.pc_out[31:0]
+@22
+instruction_decode_tb.ID.ID_EX_REGISTER.reg_a_out[31:0]
+instruction_decode_tb.ID.ID_EX_REGISTER.reg_b_out[31:0]
+@28
+instruction_decode_tb.ID.ID_EX_REGISTER.reg_file_write_out
+instruction_decode_tb.ID.ID_EX_REGISTER.select_mux_1_out[1:0]
+instruction_decode_tb.ID.ID_EX_REGISTER.select_mux_2_out[1:0]
+instruction_decode_tb.ID.ID_EX_REGISTER.select_mux_4_out[1:0]
+[pattern_trace] 1
+[pattern_trace] 0

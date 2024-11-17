@@ -1,7 +1,8 @@
 module instruction_fetch(
     input clock,
     input reset,
-    input stall,
+    input pc_load,
+    input if_id_load,
     input mux3_selector,
     input [31:0] pc_branch_in,
     output [31:0] pc_out,
@@ -40,6 +41,7 @@ memory_inst MEM_INSTRUCION (
 
 if_id_register IF_ID (
     .clock(clock),
+    .load(if_id_load),
     .reset(reset),
     .instruction_in(s_instruction_out),
     .pc_in(s_pc_out),
