@@ -1,4 +1,4 @@
-module ref_file (
+module reg_file (
     input   [4:0]   ra,     
     input   [4:0]   rb,         
     input           we,     // write enable             
