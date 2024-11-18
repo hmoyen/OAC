@@ -12,7 +12,7 @@ module controller (
     output reg  [1 :0]  select_mux_4
 );
 
-    always @(posedge clock or posedge reset) begin
+    always @(negedge clock or posedge reset) begin
         if (reset) begin
 
             mem_re          <= 1'b0;

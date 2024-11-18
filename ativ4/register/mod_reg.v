@@ -6,7 +6,7 @@ module mod_reg(
         output reg [31:0] out
         );
 
-    always @(posedge clk) begin
+    always @(negedge clk) begin
         if(reset) begin
             out = 1'b0;
         end else begin

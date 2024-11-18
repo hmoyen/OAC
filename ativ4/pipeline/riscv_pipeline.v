@@ -41,8 +41,8 @@ module riscv_pipeline(
         .pc(pc_out_if),
         .Din(wb_out),
         .rw(addr_rd_out_WB),
-        .rd_ex_mem(addr_rd_out_EX), // Forwarding addresses
-        .rd_mem_wb(addr_rd_out_MEM),
+        .rd_ex_mem(addr_rd_out_ID), // Forwarding addresses
+        .rd_mem_wb(addr_rd_out_EX),
         .pc_load(pc_load),
         .if_id_load(if_id_load),
         .mem_re_out(mem_re_out_id),
@@ -106,7 +106,7 @@ module riscv_pipeline(
         .reg_out_b(reg_b_out_ex),
         .select_mux_4_in(select_mux_4_out_ex),
         .select_mux_2_in(select_mux_2_out_ex),
-        .reg_file_write_out(reg_file_write_out_id),
+        .reg_file_write_out(reg_file_write_wb_in),
         .mem_out(mem_out),
         .addr_rd_out(addr_rd_out_MEM),
         .alu_result_out(alu_result_out_mem),

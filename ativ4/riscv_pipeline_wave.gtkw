@@ -1,0 +1,95 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Mon Nov 18 19:04:31 2024
+[*]
+[dumpfile] "/home/victor/Documentos/USP/OAC_ATIV4/OAC/ativ4/riscv_pipeline_tb.vcd"
+[dumpfile_mtime] "Mon Nov 18 18:58:14 2024"
+[dumpfile_size] 130870
+[savefile] "/home/victor/Documentos/USP/OAC_ATIV4/OAC/ativ4/riscv_pipeline_wave.gtkw"
+[timestart] 647100
+[size] 1920 1029
+[pos] -1 -1
+*-17.000000 1014100 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] riscv_pipeline_tb.
+[treeopen] riscv_pipeline_tb.riscv.
+[treeopen] riscv_pipeline_tb.riscv.ID.REGISTER_FILE.genblk1[1].
+[treeopen] riscv_pipeline_tb.riscv.ID.REGISTER_FILE.genblk1[2].
+[treeopen] riscv_pipeline_tb.riscv.ID.REGISTER_FILE.genblk1[3].
+[treeopen] riscv_pipeline_tb.riscv.MEM.
+[sst_width] 268
+[signals_width] 385
+[sst_expanded] 1
+[sst_vpaned_height] 229
+@28
+riscv_pipeline_tb.clk
+riscv_pipeline_tb.reset
+@200
+-FETCH
+@24
+riscv_pipeline_tb.riscv.IF.IF_ID.pc_in[31:0]
+@28
+riscv_pipeline_tb.riscv.IF.mux3_selector
+@24
+riscv_pipeline_tb.riscv.IF.IF_ID.instruction_in[31:0]
+@28
+riscv_pipeline_tb.riscv.IF.pc_load
+riscv_pipeline_tb.riscv.IF.if_id_load
+@200
+-DECODE
+@24
+riscv_pipeline_tb.riscv.ID.instruction[31:0]
+riscv_pipeline_tb.riscv.ID.pc[31:0]
+riscv_pipeline_tb.riscv.ID.Din[31:0]
+riscv_pipeline_tb.riscv.ID.rw[4:0]
+@28
+riscv_pipeline_tb.riscv.ID.write_enable
+@22
+riscv_pipeline_tb.riscv.ID.REGISTER_FILE.genblk1[1].xI.out[31:0]
+riscv_pipeline_tb.riscv.ID.REGISTER_FILE.genblk1[2].xI.out[31:0]
+@24
+riscv_pipeline_tb.riscv.ID.IMMEDIATE.immediate[31:0]
+riscv_pipeline_tb.riscv.ID.ID_EX_REGISTER.addr_rd_in[4:0]
+riscv_pipeline_tb.riscv.ID.ID_EX_REGISTER.reg_a_in[31:0]
+riscv_pipeline_tb.riscv.ID.ID_EX_REGISTER.reg_b_in[31:0]
+@22
+riscv_pipeline_tb.riscv.ID.REGISTER_FILE.genblk1[1].xI.out[31:0]
+riscv_pipeline_tb.riscv.ID.REGISTER_FILE.genblk1[2].xI.out[31:0]
+riscv_pipeline_tb.riscv.ID.REGISTER_FILE.genblk1[3].xI.out[31:0]
+@200
+-CONTROLLER
+@28
+riscv_pipeline_tb.riscv.ID.CONTROLLER.mem_re
+riscv_pipeline_tb.riscv.ID.CONTROLLER.mem_we
+riscv_pipeline_tb.riscv.ID.CONTROLLER.reg_file_write
+riscv_pipeline_tb.riscv.ID.CONTROLLER.select_mux_1[1:0]
+riscv_pipeline_tb.riscv.ID.CONTROLLER.select_mux_2[1:0]
+riscv_pipeline_tb.riscv.ID.CONTROLLER.select_mux_2[1:0]
+@200
+-HAZARD
+@28
+riscv_pipeline_tb.riscv.ID.HAZARD.branch_instruction_controller
+riscv_pipeline_tb.riscv.ID.HAZARD.branch_instruction_id_ex
+@22
+riscv_pipeline_tb.riscv.ID.HAZARD.rs1[4:0]
+riscv_pipeline_tb.riscv.ID.HAZARD.rs2[4:0]
+@24
+riscv_pipeline_tb.riscv.ID.HAZARD.rd_ex_mem[4:0]
+riscv_pipeline_tb.riscv.ID.HAZARD.rd_mem_wb[4:0]
+@28
+riscv_pipeline_tb.riscv.ID.HAZARD.pc_load
+riscv_pipeline_tb.riscv.ID.HAZARD.if_id_load
+riscv_pipeline_tb.riscv.ID.HAZARD.mux5_selector
+@200
+-MEMORY
+@28
+riscv_pipeline_tb.riscv.MEM.mem_re
+riscv_pipeline_tb.riscv.MEM.mem_we
+@24
+riscv_pipeline_tb.riscv.MEM.addr_rd_in[4:0]
+@28
+riscv_pipeline_tb.riscv.MEM.reg_file_write_in
+@24
+riscv_pipeline_tb.riscv.MEM.MEM.addr[31:0]
+riscv_pipeline_tb.riscv.MEM.MEM.Din[31:0]
+[pattern_trace] 1
+[pattern_trace] 0
