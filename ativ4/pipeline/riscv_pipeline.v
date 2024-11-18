@@ -14,6 +14,7 @@ module riscv_pipeline(
     wire [31:0] alu_result_out_mem, mem_out, add_pc_out_mem;
     wire [1:0] select_mux_2_out_mem;
     wire select_mux_3_out_mem;
+    wire select_mux_3_out_wb;
     wire [4:0] addr_rd, addr_rd_out_ID, addr_rd_out_EX, addr_rd_out_MEM, addr_rd_out_WB;
 
     // WB wires
@@ -36,6 +37,8 @@ module riscv_pipeline(
     instruction_decode ID (
         .clock(clock),
         .reset(reset),
+        .select_mux_3(select_mux_3_out_mem),
+        .select_mux_3_wb(select_mux_3_out_wb),
         .write_enable(reg_file_write_wb_out), // WE do write back
         .instruction(instruction_out),
         .pc(pc_out_if),
@@ -111,11 +114,13 @@ module riscv_pipeline(
         .addr_rd_out(addr_rd_out_MEM),
         .alu_result_out(alu_result_out_mem),
         .select_mux_2_out(select_mux_2_out_mem),
-        .select_mux_3_out(select_mux_3_out_mem)
+        .select_mux_3_out(select_mux_3_out_mem),
+        .select_mux_3_out_wb(select_mux_3_out_wb)
     );
 
     // Write Back
     wb WB (
+        
         .addr_rd(addr_rd_out_MEM),
         .reg_file_write_in(reg_file_write_wb_in),
         .reg_file_write_out(reg_file_write_wb_out),

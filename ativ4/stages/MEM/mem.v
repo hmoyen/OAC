@@ -16,7 +16,8 @@ module mem (
     output      [31:0]  mem_out,
     output      [31:0]  alu_result_out,
     output      [1:0]   select_mux_2_out,
-    output              select_mux_3_out
+    output              select_mux_3_out,
+    output             select_mux_3_out_wb
 );
 
     // Wire declarations
@@ -49,6 +50,7 @@ module mem (
         .reset              ( reset              ),
         .reg_file_write_in  ( reg_file_write_in  ),
         .addr_rd_in         (addr_rd_in),
+        .select_mux_3_in    (select_mux_3_out),
         .add_pc_in          (           ),
         .mem_in             ( mem_data_out       ),
         .alu_result_in      ( alu_out            ),
@@ -57,6 +59,7 @@ module mem (
         .reg_file_write_out ( reg_file_write_out ),
         .add_pc_out         (       ),
         .mem_out            ( mem_out            ),
+        .select_mux_3_out   (select_mux_3_out_wb),
         .addr_rd_out        (addr_rd_out),
         .alu_result_out     ( alu_result_out     ),
         .select_mux_2_out   ( select_mux_2_out   )
