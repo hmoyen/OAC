@@ -1,7 +1,7 @@
 module mem_wb_reg (
     input               clk,
     input               reset,
-    input               branch_in,
+    input               select_mux_3_in,
     input               pc_load_in,
     input        [4:0]  addr_rd_in,
     input               pc_reset_in,
@@ -13,6 +13,7 @@ module mem_wb_reg (
     input       [1:0]   select_mux_2_in,
 
     output reg          branch_out,
+    output reg          select_mux_3_out,
     output reg          pc_load_out,
     output reg          pc_reset_out,
     output reg          reg_file_write_out,
@@ -27,7 +28,7 @@ module mem_wb_reg (
     always @(posedge clk or posedge reset) begin
         if (reset) begin
 
-            branch_out          <= 1'b0;
+            select_mux_3_out          <= 1'b0;
             pc_load_out         <= 1'b0;
             pc_reset_out        <= 1'b0;
             reg_file_write_out  <= 1'b0;
@@ -39,7 +40,7 @@ module mem_wb_reg (
             mem_out             <= 32'b0;
             alu_result_out      <= 32'b0;
         end else begin
-            branch_out          <= branch_in;
+            select_mux_3_out          <= select_mux_3_in;
             pc_load_out         <= pc_load_in;
             addr_rd_out          <= addr_rd_in;
             pc_reset_out        <= pc_reset_in;
