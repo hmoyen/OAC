@@ -93,7 +93,7 @@ id_ex_reg ID_EX_REGISTER(
     .select_mux_4_in(s_mux5_selector ? 2'b0  : select_mux_4_int),
     .reg_a_in(s_out_a),
     .reg_b_in(s_out_b),
-    .addr_rd_in(s_rd),
+    .addr_rd_in(s_mux5_selector ? 5'b0 : s_rd),
     .addr_rd_out(addr_rd_out),
     .immediate_in(s_immediate),
     .pc_in(pc),
@@ -109,7 +109,7 @@ id_ex_reg ID_EX_REGISTER(
     .reg_b_out(reg_b_out),
     .immediate_out(immediate_out),
     .pc_out(pc_out),
-    .branch_instruction_in(branch_instruction_int),
+    .branch_instruction_in(s_mux5_selector ? 1'b0 : branch_instruction_int),
     .branch_instruction_out(branch_instruction_id_ex),
     .funct7e3_out(funct7e3_out)
 );

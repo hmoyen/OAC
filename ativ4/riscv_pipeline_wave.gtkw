@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Mon Nov 18 20:55:07 2024
+[*] Tue Nov 19 11:35:17 2024
 [*]
 [dumpfile] "/home/victor/Documentos/USP/OAC_ATIV4/OAC/ativ4/riscv_pipeline_tb.vcd"
-[dumpfile_mtime] "Mon Nov 18 20:53:02 2024"
-[dumpfile_size] 128971
+[dumpfile_mtime] "Tue Nov 19 11:34:52 2024"
+[dumpfile_size] 126863
 [savefile] "/home/victor/Documentos/USP/OAC_ATIV4/OAC/ativ4/riscv_pipeline_wave.gtkw"
 [timestart] 0
-[size] 1920 1029
+[size] 1914 1025
 [pos] -1 -1
-*-22.000000 950000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-18.323442 1195000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] riscv_pipeline_tb.
 [treeopen] riscv_pipeline_tb.riscv.
 [treeopen] riscv_pipeline_tb.riscv.ID.
@@ -30,7 +30,7 @@ riscv_pipeline_tb.reset
 -FETCH
 @24
 riscv_pipeline_tb.riscv.IF.IF_ID.pc_in[31:0]
-@29
+@28
 riscv_pipeline_tb.riscv.IF.mux3_selector
 @24
 riscv_pipeline_tb.riscv.IF.IF_ID.instruction_in[31:0]
@@ -55,10 +55,12 @@ riscv_pipeline_tb.riscv.ID.ID_EX_REGISTER.reg_a_in[31:0]
 riscv_pipeline_tb.riscv.ID.ID_EX_REGISTER.reg_b_in[31:0]
 riscv_pipeline_tb.riscv.ID.REGISTER_FILE.ra[4:0]
 riscv_pipeline_tb.riscv.ID.REGISTER_FILE.rb[4:0]
-@22
 riscv_pipeline_tb.riscv.ID.REGISTER_FILE.DoutA[31:0]
-@24
 riscv_pipeline_tb.riscv.ID.REGISTER_FILE.DoutB[31:0]
+riscv_pipeline_tb.riscv.ID.ID_EX_REGISTER.pc_out[31:0]
+riscv_pipeline_tb.riscv.ID.ID_EX_REGISTER.immediate_out[31:0]
+riscv_pipeline_tb.riscv.ID.ID_EX_REGISTER.addr_rd_in[4:0]
+riscv_pipeline_tb.riscv.ID.ID_EX_REGISTER.addr_rd_out[4:0]
 @200
 -CONTROLLER
 @28
@@ -75,6 +77,7 @@ riscv_pipeline_tb.riscv.ID.HAZARD.branch_instruction_controller
 riscv_pipeline_tb.riscv.ID.HAZARD.branch_instruction_id_ex
 riscv_pipeline_tb.riscv.ID.ID_EX_REGISTER.branch_instruction_in
 riscv_pipeline_tb.riscv.ID.ID_EX_REGISTER.branch_instruction_out
+riscv_pipeline_tb.riscv.ID.HAZARD.data_hazard
 @24
 riscv_pipeline_tb.riscv.ID.HAZARD.rs1[4:0]
 riscv_pipeline_tb.riscv.ID.HAZARD.rs2[4:0]
