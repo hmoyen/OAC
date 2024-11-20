@@ -25,12 +25,20 @@ module instruction_decode(
     output  [31:0]  immediate_out,
     output  [31:0]  pc_out,
     output  [4:0]   addr_rd_out,           
-    output  [6:0]   funct7e3_out
+    output  [6:0]   funct7e3_out,
+    output          mux3_selector,
+    output  [31:0]   branch_address
 );
 
+parameter [6:0] RTYPE = 7'b0110011,
+                STYPE = 7'b0100011,
+                SBTYPE = 7'b1100011,
+                ITYPE =  7'b0000011;
+
 wire [4:0] s_ra, s_rb, s_rd;
-wire [31:0] s_out_a, s_out_b, s_immediate;
+wire [31:0] s_out_a, s_out_b, s_immediate, s_branch_address;
 wire s_pc_load, s_if_id_load, s_mux5_selector;
+wire s_do_branch;
 wire mem_re_int, mem_we_int, reg_file_write_int, branch_instruction_int, branch_instruction_id_ex;
 wire [1:0] alu_op_int, select_mux_1_int, select_mux_2_int, select_mux_4_int;
 
@@ -120,5 +128,9 @@ assign s_rd = instruction[11:7];
 assign pc_load = s_pc_load;
 assign if_id_load = s_if_id_load;
 assign branch_instruction = branch_instruction_id_ex;
+
+assign branch_address = pc + s_immediate;
+assign mux3_selector = (s_out_a == s_out_b) && (instruction[6:0] == SBTYPE);
+
 
 endmodule

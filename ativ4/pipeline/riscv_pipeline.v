@@ -61,7 +61,9 @@ module riscv_pipeline(
         .addr_rd_out(addr_rd_out_ID),
         .immediate_out(immediate_out),
         .pc_out(pc_out_id),
-        .funct7e3_out(funct7e3_out)
+        .funct7e3_out(funct7e3_out),
+        .mux3_selector(select_mux_3_out_mem),
+        .branch_address(add_pc_out_ex)
     );
 
     // Execute
@@ -92,7 +94,7 @@ module riscv_pipeline(
         .reg_b_out(reg_b_out_ex),
         .alu_out(alu_out_ex),
         .addr_rd_out(addr_rd_out_EX),
-        .add_pc_out(add_pc_out_ex)
+        .add_pc_out()
     );
 
     // Memory
@@ -114,7 +116,7 @@ module riscv_pipeline(
         .addr_rd_out(addr_rd_out_MEM),
         .alu_result_out(alu_result_out_mem),
         .select_mux_2_out(select_mux_2_out_mem),
-        .select_mux_3_out(select_mux_3_out_mem),
+        .select_mux_3_out(),
         .select_mux_3_out_wb(select_mux_3_out_wb)
     );
 

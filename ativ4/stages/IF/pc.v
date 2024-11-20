@@ -7,7 +7,7 @@ module pc(
 );
 
 reg [31:0] pc;
-    always @(posedge clock) begin
+    always @(negedge clock) begin
         if(reset) begin
             pc <= 32'b0;
         end else if(load) begin
