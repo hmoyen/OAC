@@ -17,7 +17,9 @@ module add_sub32 (
     // there isn't carry in subtraction
     assign carryOut = op ? result[32] : 1'b0;
 
-endmodulemodule riscv_pipeline(
+endmodule
+
+module riscv_pipeline(
     input               clock,
     input               reset
     );
@@ -159,7 +161,9 @@ module mod_and (
     output  [31:0]    R
 );
     assign R = A & B;
-endmodulemodule comparator (
+endmodule
+
+module comparator (
     input   [31:0]    A,
     input   [31:0]    B,
     output            eq,
@@ -169,19 +173,25 @@ endmodulemodule comparator (
     assign eq = ( A == B ); 
     assign lt = ( A <  B ); 
     assign gt = ( A >  B ); 
-endmodulemodule mod_or (
+endmodule
+
+module mod_or (
     input   [31:0]    A,
     input   [31:0]    B,
     output  [31:0]    R
 );
     assign R = A | B;
-endmodulemodule mod_xor (
+endmodule
+
+module mod_xor (
     input   [31:0]    A,
     input   [31:0]    B,
     output  [31:0]    R
 );
     assign R = A ^ B;
-endmodulemodule alu_dp (
+endmodule
+
+module alu_dp (
     input   [2: 0]    op,
     input   [31:0]    A,
     input   [31:0]    B,
@@ -248,7 +258,9 @@ endmodulemodule alu_dp (
                 (  op ==  3'd3 ) ? resultOr  :                      // or
                 (  op ==  3'd4 ) ? resultXor :                      // xor
                 32'b0;                              
-endmodulemodule alu_uc (
+endmodule
+
+module alu_uc (
     input               clk,
     input       [6:0]   funct7e3, 
     input       [1:0]   aluOp,
@@ -316,7 +328,9 @@ end
                     (funct7e3[2:0] == 3'b101 ? flags[3]:  // bgt (A >  B)
                     1'b0)));
 
-endmodulemodule immediateG(
+endmodule
+
+module immediateG(
     input   [31:0]      instruction,
     output  [31:0]      immediate 
 );
@@ -362,7 +376,9 @@ endmodule              module memory_file(
     end
 
 assign out = re ? memory[addr] : out;
-endmodulemodule memory_inst(
+endmodule
+
+module memory_inst(
     input   [31:0]  addr,       // address
     input   [31:0]  Din,        // data input
     input           we,         // write enable
@@ -460,15 +476,15 @@ endmodulemodule memory_inst(
 
         // Instrução: add x10, x1, x5
         // Binário: 0000000_00000_00001_000_01010_0110011
-        // memory[5] = 32'b0000000_00101_00001_000_01010_0110011; // add x10, x1, x0
+        memory[5] = 32'b0000000_00101_00001_000_01010_0110011; // add x10, x1, x0
 
         //BEQ
         //if(reg[1] == reg[10]): então faz branch (OBS: nesse caso ocorre) imm = 16 
-        memory[5] = 32'b0_000000_00001_00001_000_1000_0_1100011;
+        memory[6] = 32'b0_000000_00001_00001_000_1000_0_1100011;
 
         // Instrução: lw x5, 3(x0)
         // Binário: 000000000100_00000_010_00100_0000011
-        memory[6] = 32'b000000000011_00000_010_00101_0000011; //
+        memory[7] = 32'b000000000011_00000_010_00101_0000011; //
 
         // // Instrução: add x10, x3, x0
         // // Binário: 0000000_00000_00001_000_01010_0110011
@@ -495,7 +511,9 @@ endmodulemodule memory_inst(
     end
 
 assign out = re ? memory[addr] : out;
-endmodulemodule mux_4 (
+endmodule
+
+module mux_4 (
     input  [1 :0]    select,
     input  [31:0]    D0,
     input  [31:0]    D1,
@@ -509,7 +527,9 @@ assign out = ( select == 2'd0   ) ? D0 :
              ( select == 2'd2   ) ? D2 :
                                     D3 ;
              
-endmodulemodule mux_2 #(
+endmodule
+
+module mux_2 #(
     parameter WIDTH = 32
 ) (
     input  select,
@@ -520,7 +540,9 @@ endmodulemodule mux_2 #(
 
 assign out = ( select == 1'b0   ) ? D0 : D1;
              
-endmodulemodule instruction_reg(
+endmodule
+
+module instruction_reg(
         input [31:0] in, 
         input clk, 
         input load, 
@@ -531,7 +553,9 @@ endmodulemodule instruction_reg(
         if(load == 1'b1) out <= in; // instruction register load when load enable
     end
 
-endmodulemodule mod_reg_param #(
+endmodule
+
+module mod_reg_param #(
     parameter N = 32
 ) (
         input [N-1:0] in, 
@@ -544,7 +568,9 @@ endmodulemodule mod_reg_param #(
         if(load == 1'b1) out = in; 
     end
 
-endmodulemodule mod_reg(
+endmodule
+
+module mod_reg(
         input [31:0] in, 
         input clk, 
         input load, 
@@ -559,13 +585,16 @@ endmodulemodule mod_reg(
             if(load == 1'b1) out = in; 
         end
     end
-endmodulemodule reg_file (
+endmodule
+
+module reg_file (
     input   [4:0]   ra,     
     input   [4:0]   rb,         
     input           we,     // write enable             
     input   [31:0]  Din,       
     input   [4: 0]  rw,     // register write        
-    input           clk,              
+    input           clk,
+    input reset,              
     output  [31:0]  DoutA, 
     output  [31:0]  DoutB  
 );
@@ -589,14 +618,16 @@ endmodulemodule reg_file (
     genvar i;       // creating all the registers
     generate    
         for(i = 1; i < 32; i = i+1) begin
-            mod_reg xI (.in(Din), .clk(clk), .load(we_reg[i]), .out(r_out[i]), .reset(1'b0)); // xI
+            mod_reg xI (.in(Din), .clk(clk), .load(we_reg[i]), .out(r_out[i]), .reset(reset)); // xI
         end
     endgenerate
     
     assign DoutA = r_out[ra];
     assign DoutB = r_out[rb];
 
-endmodulemodule ex_mem_reg (
+endmodule
+
+module ex_mem_reg (
     input               clk,
     input               reset,
     input               branch_instruction_in,
@@ -811,7 +842,9 @@ end
 assign instruction_out = instruction;
 assign pc_out = pc;
 
-endmodulemodule controller (
+endmodule
+
+module controller (
     input               clock,
     input               reset,
     input       [6 :0]  opcode,
@@ -893,7 +926,9 @@ endmodulemodule controller (
         end
     end
 
-endmodulemodule hazard(
+endmodule
+
+module hazard(
     input clock,
     input reset,
     input select_mux_3,
@@ -922,8 +957,8 @@ assign data_hazard = (((opcode == RTYPE) || (opcode == STYPE) || (opcode == SBTY
                      (((opcode == RTYPE) || (opcode == STYPE) || (opcode == SBTYPE)) && 
                      ((rs2 != 0) && ((rs2 == rd_ex_mem) || (rs2 == rd_mem_wb))));
 
-assign pc_load = ~(data_hazard || (branch_instruction_controller && ~branch_instruction_id_ex));
-assign if_id_load = ~(data_hazard || (branch_instruction_controller && ~branch_instruction_id_ex));
+assign pc_load = ~(data_hazard || ((opcode == SBTYPE) && !branch_instruction_id_ex));
+assign if_id_load = ~(data_hazard);
 assign mux5_selector = data_hazard ;
 
 endmodule
@@ -1062,7 +1097,9 @@ assign branch_address = pc + s_immediate;
 assign mux3_selector = (s_out_a == s_out_b) && (instruction[6:0] == SBTYPE);
 
 
-endmodulemodule instruction_fetch(
+endmodule
+
+module instruction_fetch(
     input clock,
     input reset,
     input pc_load,
@@ -1113,7 +1150,9 @@ if_id_register IF_ID (
     .pc_out(pc_out)
 );
 
-endmodulemodule pc(
+endmodule
+
+module pc(
     input clock,
     input reset,
     input load,
@@ -1134,7 +1173,9 @@ reg [31:0] pc;
 
 assign pc_out = pc;
 
-endmodulemodule ex (
+endmodule
+
+module ex (
     input               clk,
     input               reset,
     input               mem_re_in,

@@ -100,7 +100,7 @@ module memory_inst(
 
         //BEQ
         //if(reg[1] == reg[10]): então faz branch (OBS: nesse caso ocorre) imm = 16 
-        memory[6] = 32'b0_000000_01010_01010_000_1000_0_1100011;
+        memory[6] = 32'b0_000000_00001_00001_000_1000_0_1100011;
 
         // Instrução: lw x5, 3(x0)
         // Binário: 000000000100_00000_010_00100_0000011
