@@ -4,7 +4,8 @@ module reg_file (
     input           we,     // write enable             
     input   [31:0]  Din,       
     input   [4: 0]  rw,     // register write        
-    input           clk,              
+    input           clk,
+    input reset,              
     output  [31:0]  DoutA, 
     output  [31:0]  DoutB  
 );
@@ -28,7 +29,7 @@ module reg_file (
     genvar i;       // creating all the registers
     generate    
         for(i = 1; i < 32; i = i+1) begin
-            mod_reg xI (.in(Din), .clk(clk), .load(we_reg[i]), .out(r_out[i]), .reset(1'b0)); // xI
+            mod_reg xI (.in(Din), .clk(clk), .load(we_reg[i]), .out(r_out[i]), .reset(reset)); // xI
         end
     endgenerate
     
