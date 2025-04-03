@@ -20,7 +20,7 @@ The following instructions will be implemented:
 
 ## Step-by-Step  
 
-First, to carry out the project, a multi-cycle RISC-V implementation must be created. As a reference, we used the 64-bit RISC-V project developed in [SD2](https://github.com/henriquegreg/PCS3225---Sistemas-Digitais-II-2023-/).  
+First, to carry out the project, a multi-cycle RISC-V implementation must be created. As a reference, we used the 64-bit RISC-V project developed in [SD2](https://github.com/hmoyen/SD2/tree/main/RISC-V).  
 
 The following components will be implemented:  
 - [X] **ALU:**  
