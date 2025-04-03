@@ -70,4 +70,3 @@ To compile with Icarus Verilog, run the following commands:
 iverilog -c riscv_compile.txt
 vvp a.out
 gtkwave riscv_tb.vcd -a .\wave.gtkw
-``
