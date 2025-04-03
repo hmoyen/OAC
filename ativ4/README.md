@@ -45,22 +45,22 @@ The following components will be implemented:
 
 ## What Still Needs to Be Done  
 
-- [ ] **Hazards:**  
+- [X] **Hazards:**  
   - Implement hazard detection (data, control, and structural hazards).  
   - Implement forwarding (data forwarding) and stalling strategies to handle hazards.  
-- [ ] **Datapath Integration:**  
+- [X] **Datapath Integration:**  
   - Integrate the new pipeline registers into the datapath.  
   - Set up interconnections between stages.  
-- [ ] **IF Stage (Instruction Fetch) Module:**  
+- [X] **IF Stage (Instruction Fetch) Module:**  
   - Implement the instruction fetch stage, including PC manipulation and instruction memory access.  
-- [ ] **ID Stage (Instruction Decode) Module:**  
+- [X] **ID Stage (Instruction Decode) Module:**  
   - Implement instruction decoding and register read control.  
-- [ ] **EX Stage (Execute) Module:**  
+- [X] **EX Stage (Execute) Module:**  
   - Implement ALU execution, address calculation for load/store instructions, and branch control.  
-- [ ] **MEM Stage (Memory) Module:**  
+- [X] **MEM Stage (Memory) Module:**  
   - Implement memory operations (load/store).  
   - Control access to data memory.  
-- [ ] **WB Stage (Writeback) Module:**  
+- [X] **WB Stage (Writeback) Module:**  
   - Implement writing back to the register file after instruction execution.  
 
 ## Testbench  
